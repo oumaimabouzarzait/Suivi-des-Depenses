@@ -1,0 +1,104 @@
+<script>var defaultThemeMode = "light"; var themeMode; if (document.documentElement) { if (document.documentElement.hasAttribute("data-theme-mode")) { themeMode = document.documentElement.getAttribute("data-theme-mode"); } else { if (localStorage.getItem("data-theme") !== null) { themeMode = localStorage.getItem("data-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-theme", themeMode); }</script>
+<!--end::Theme mode setup on page load-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Page bg image-->
+    <style>
+        body {
+            background-image: url('assets/media/auth/bg8.jpg');
+        }
+
+        [data-theme="dark"] body {
+            background-image: url('assets/media/auth/bg8-dark.jpg');
+        }
+    </style>
+    <!--end::Page bg image-->
+    <!--begin::Authentication - Signup Welcome Message -->
+    <div class="d-flex flex-column flex-center flex-column-fluid">
+        <!--begin::Content-->
+        <div class="d-flex flex-column flex-center text-center p-10">
+            <!--begin::Wrapper-->
+            <div class="card card-flush w-md-550px py-5">
+                <div class="card-body py-15 py-lg-20">
+                    <!--begin::Form-->
+                    <!--begin::Form-->
+                    <form  [formGroup]="verifyForm" (ngSubmit)="verify()" class="form w-100 mb-13" novalidate="novalidate"
+                        data-kt-redirect-url="../../demo1/dist/index.html" id="kt_sing_in_two_steps_form">
+                        <!--begin::Icon-->
+                        <div class="text-center mb-10">
+                            <img alt="Logo" class="mh-125px" src="assets/media/svg/misc/smartphone-2.svg" />
+                        </div>
+                        <!--end::Icon-->
+                        <!--begin::Heading-->
+                        <div class="text-center mb-10">
+                            <!--begin::Title-->
+                            <h1 class="text-dark mb-3">Vérification en deux étapes</h1>
+                            <!--end::Title-->
+                            <!--begin::Sub-title-->
+                            <div class="text-muted fw-semibold fs-5 mb-5">Entrez le code de vérification que nous avons envoyé à votre adresse e-mail</div>
+                            <!--end::Sub-title-->
+                        </div>
+                        <div *ngIf="msgError !=''" class="alert alert-danger">
+                            <div>
+                                {{msgError}}
+                            </div>
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Section-->
+                        <div class="mb-10">
+                            <!--begin::Label-->
+                            <div class="fw-bold text-start text-dark fs-6 mb-1 ms-1">Tapez votre code de sécurité à 6 chiffres
+                            </div>
+                            <!--end::Label-->
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-wrap flex-stack">
+                                <input type="text" name="code_1" formControlName="nb1" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value="" #code1 (keyup)="move($event, '', code1, code2)" />
+                                <input type="text" #code2 name="code_2" formControlName="nb2" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value="" (keyup)="move($event, code1, code2, code3)" />
+                                <input type="text" #code3 name="code_3" formControlName="nb3" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value="" (keyup)="move($event, code2, code3, code4)" />
+                                <input type="text" #code4 name="code_4" formControlName="nb4" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value="" (keyup)="move($event, code3, code4, code5)" />
+                                <input type="text" #code5 name="code_5" formControlName="nb5" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value="" (keyup)="move($event, code4, code5, code6)" />
+                                <input type="text" #code6 name="code_6" formControlName="nb6" data-inputmask="'mask': '9', 'placeholder': ''"
+                                    maxlength="1"
+                                    class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2"
+                                    value=""  (keyup)="move($event, code5, code6, '')"/>
+                            </div>
+                            <!--begin::Input group-->
+                        </div>
+                        <!--end::Section-->
+                        <!--begin::Submit-->
+                        <div class="d-flex flex-center">
+                            <button type="submit" id="kt_sing_in_two_steps_submit"
+                                class="btn btn-lg btn-primary fw-bold">
+                                <span class="indicator-label">Soumettre</span>
+                                <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                        <!--end::Submit-->
+                    </form>
+                    <!--end::Form-->
+                    <!--end::Form-->
+                </div>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Authentication - Signup Welcome Message-->
+</div>
+
